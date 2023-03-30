@@ -34,7 +34,7 @@ class ImcActivity : AppCompatActivity() {
             val result = calculateImc(weight, height)
             val imcResponseId = imcResponse(result)
 
-            Toast.makeText(this,imcResponseId,Toast.LENGTH_LONG).show()
+            Toast.makeText(this, imcResponseId, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -52,7 +52,7 @@ class ImcActivity : AppCompatActivity() {
     }
 
     @StringRes
-    private fun imcResponse(imc: Double): Int{
+    private fun imcResponse(imc: Double): Int {
         return when {
             imc < 15.0 -> R.string.imc_severaly_low_weight
             imc < 16.0 -> R.string.imc_very_low_weight
