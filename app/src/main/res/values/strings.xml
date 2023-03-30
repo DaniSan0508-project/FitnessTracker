@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Fitness Tracker</string>
+    <string name="label_imc">IMC</string>
+    <string name="imc_desc">
+        IMC é a sigla para Índice de Massa Corporal que serve para avaliar o peso
+        do indivíduo em relação à sua altura e assim indicar se está dentro do peso ideal,
+        acima ou abaixo do peso desejado.\n\nPreencha os campos de peso e altura para descobrir
+        o seu IMC
+    </string>
+    <string name="weight">Peso(kg)</string>
+    <string name="height">Altura(cm)</string>
+    <string name="calc">Calcular</string>
+    <string name="valid_imc_fields">Todos os campos devem ser maior que 0</string>
+</resources>
