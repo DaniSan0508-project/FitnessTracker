@@ -17,12 +17,12 @@
         <TextView style="@style/TextViewForm" />
 
         <EditText
-            android:id="@+id/edit_imc_weight"
+            android:id="@+id/edit_imc_height"
             style="@style/EditTextForm"
             android:hint="@string/height" />
 
         <EditText
-            android:id="@+id/edit_imc_height"
+            android:id="@+id/edit_imc_weight"
             style="@style/EditTextForm"
             android:hint="@string/weight" />
 
