@@ -1,9 +1,12 @@
 package co.tiagoaguiar.fitnesstracker
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -15,6 +18,7 @@ class ImcActivity : AppCompatActivity() {
     private lateinit var editHeight: EditText
     private lateinit var editWeight: EditText
 
+    @SuppressLint("ServiceCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_imc)
@@ -46,6 +50,10 @@ class ImcActivity : AppCompatActivity() {
                 ) { dialog, which -> TODO("Not yet implemented") }
                 .create()
                 .show()
+
+            val inputMethodManager =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         }
     }
 
