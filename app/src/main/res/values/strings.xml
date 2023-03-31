@@ -20,4 +20,6 @@
     <string name="imc_so_hight_weight">Moderadamente obeso</string>
     <string name="imc_severely_hight_weight">Severamente obeso</string>
     <string name="imc_extreme_weight">Extremamente obeso</string>
+
+    <string name="imc_response">Seu IMC é: %1$.2f</string>
 </resources>

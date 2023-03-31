@@ -1,5 +1,6 @@
 package co.tiagoaguiar.fitnesstracker
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 
 class ImcActivity : AppCompatActivity() {
 
@@ -34,7 +36,16 @@ class ImcActivity : AppCompatActivity() {
             val result = calculateImc(weight, height)
             val imcResponseId = imcResponse(result)
 
-            Toast.makeText(this, imcResponseId, Toast.LENGTH_LONG).show()
+
+            val title = getString(R.string.imc_response, result)
+            val dialog = AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(imcResponseId)
+                .setPositiveButton(
+                    android.R.string.ok
+                ) { dialog, which -> TODO("Not yet implemented") }
+                .create()
+                .show()
         }
     }
 
