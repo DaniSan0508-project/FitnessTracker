@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_container_imc"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#00ff00"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="#d3d3d3"
     >
-    <Button
-        android:id="@+id/btn_item"
+    <ImageView
+        android:id="@+id/item_img_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Olá mundo"/>
-
+        android:src="@drawable/ic_baseline_wb_sunny_24"
+        />
+    <TextView
+        android:id="@+id/item_txt_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_imc"
+        />
 </LinearLayout>
