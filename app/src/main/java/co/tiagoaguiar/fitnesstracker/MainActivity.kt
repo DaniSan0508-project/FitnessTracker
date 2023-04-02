@@ -5,15 +5,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+interface OnItemClickListener {
+    fun onViewClick(id: Int)
+}
+
+class MainActivity : AppCompatActivity(), OnItemClickListener {
     private lateinit var rvMain: RecyclerView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,13 +40,38 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        var adapter = MainAdapter(mainItems)
+        mainItems.add(
+            MainItem(
+                id = 3,
+                drawableId = R.drawable.ic_tmb,
+                textString = R.string.label_tmb,
+                color = Color.YELLOW
+            )
+        )
+
+        mainItems.add(
+            MainItem(
+                id = 4,
+                drawableId = R.drawable.ic_tmb,
+                textString = R.string.label_tmb,
+                color = Color.YELLOW
+            )
+        )
+
+        var adapter = MainAdapter(mainItems, this)
         rvMain = findViewById(R.id.rv_main)
         rvMain.adapter = adapter
-        rvMain.layoutManager = LinearLayoutManager(this)
+        rvMain.layoutManager = GridLayoutManager(this, 2)
     }
 
-    private inner class MainAdapter(private val mainItems: MutableList<MainItem>) : RecyclerView.Adapter<MainViewHolder>() {
+    override fun onViewClick(id: Int) {
+        Toast.makeText(this, "Clicou $id", Toast.LENGTH_SHORT).show()
+    }
+
+    private inner class MainAdapter(
+        private val mainItems: MutableList<MainItem>,
+        private val onItemClickListener: OnItemClickListener
+    ) : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
             val view = layoutInflater.inflate(R.layout.main_item, parent, false)
             return MainViewHolder(view)
@@ -57,16 +85,22 @@ class MainActivity : AppCompatActivity() {
         override fun getItemCount(): Int {
             return mainItems.size
         }
-    };
-    private class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: MainItem) {
-            val img: ImageView = itemView.findViewById(R.id.item_img_icon)
-            val name: TextView = itemView.findViewById(R.id.item_txt_name)
-            val container: LinearLayout = itemView.findViewById(R.id.item_container_imc)
 
-            img.setImageResource(item.drawableId)
-            name.setText(item.textString)
-            container.setBackgroundColor(item.color)
+        private inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            fun bind(item: MainItem) {
+                val img: ImageView = itemView.findViewById(R.id.item_img_icon)
+                val name: TextView = itemView.findViewById(R.id.item_txt_name)
+                val container: LinearLayout = itemView.findViewById(R.id.item_container_imc)
+
+                img.setImageResource(item.drawableId)
+                name.setText(item.textString)
+                container.setBackgroundColor(item.color)
+
+                container.setOnClickListener {
+                    onItemClickListener.onViewClick(item.id)
+                }
+            }
         }
     }
+
 }
