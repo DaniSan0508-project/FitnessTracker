@@ -3,6 +3,7 @@ package co.tiagoaguiar.fitnesstracker
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
+import co.tiagoaguiar.fitnesstracker.model.App
+import co.tiagoaguiar.fitnesstracker.model.Calc
 
 class ImcActivity : AppCompatActivity() {
 
@@ -48,6 +51,21 @@ class ImcActivity : AppCompatActivity() {
                 .setPositiveButton(
                     android.R.string.ok
                 ) { dialog, which -> TODO("Not yet implemented") }
+                .setNegativeButton(R.string.save) { dialog, with ->
+                    Thread {
+                        val app = (application as App)
+                        val dao = app.db.calcDao()
+                        dao.insert(Calc(type = "imc", res = result))
+
+                        runOnUiThread {
+                            val intent = Intent(this, ListCalcActivity::class.java)
+                            intent.putExtra("type", "imc")
+                            startActivity(intent)
+                        }
+                    }.start()
+
+
+                }
                 .create()
                 .show()
 

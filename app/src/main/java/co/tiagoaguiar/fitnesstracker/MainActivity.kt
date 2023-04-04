@@ -1,5 +1,6 @@
 package co.tiagoaguiar.fitnesstracker
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -66,6 +67,12 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 
     override fun onViewClick(id: Int) {
         Toast.makeText(this, "Clicou $id", Toast.LENGTH_SHORT).show()
+        when (id) {
+            1 -> {
+                val intent = Intent(this, ImcActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     private inner class MainAdapter(
