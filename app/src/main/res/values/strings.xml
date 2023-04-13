@@ -26,4 +26,5 @@
     <string name="list_response">resultado: %1$.2f, data: %2$s</string>
     <string name="save">Salvar</string>
     <string name="save_imc_data">Imc salvo com sucesso</string>
+    <string name="search">Buscar</string>
 </resources>

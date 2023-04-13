@@ -7,6 +7,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
@@ -58,9 +60,7 @@ class ImcActivity : AppCompatActivity() {
                         dao.insert(Calc(type = "imc", res = result))
 
                         runOnUiThread {
-                            val intent = Intent(this, ListCalcActivity::class.java)
-                            intent.putExtra("type", "imc")
-                            startActivity(intent)
+                            openListActivity()
                         }
                     }.start()
 
@@ -86,6 +86,24 @@ class ImcActivity : AppCompatActivity() {
 
     private fun calculateImc(weight: Int, height: Int): Double {
         return weight / ((height / 100.0) * (height / 100.0))
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId === R.id.menu_search) {
+            openListActivity()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun openListActivity() {
+        val intent = Intent(this, ListCalcActivity::class.java)
+        intent.putExtra("type", "imc")
+        startActivity(intent)
     }
 
     @StringRes
