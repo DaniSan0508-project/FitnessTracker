@@ -30,7 +30,9 @@ class ImcActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            imcCal(weightValue, heightValue)
+            val result = imcCal(weightValue, heightValue)
+
+            showShortToast("Seu IMC é:", result)
 
         }
 
@@ -62,13 +64,11 @@ class ImcActivity : AppCompatActivity() {
         return true
 
     }
-    private fun imcCal(weightValue: String, heightValue: String) {
+    private fun imcCal(weightValue: String, heightValue: String): Float {
         val weightFloat = weightValue.toFloat()
         val heightFloat = heightValue.toFloat()
         val heightInMeters = heightFloat / 100
 
-        val imc = weightFloat / (heightInMeters * heightInMeters)
-
-        Toast.makeText(this, "Seu IMC é: $imc", Toast.LENGTH_LONG).show()
+        return weightFloat / (heightInMeters * heightInMeters)
     }
 }

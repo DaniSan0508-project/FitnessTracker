@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     private lateinit var btnImc: LinearLayout
@@ -18,5 +19,8 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+    public fun showShortToast(message: String){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
