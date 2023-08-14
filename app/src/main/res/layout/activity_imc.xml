@@ -15,40 +15,23 @@
         tools:context=".ImcActivity">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="40dp"
+            style="@style/TextViewForm"
             android:text="@string/text_imc" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="30dp"
+            android:id="@+id/imc_"
+            style="@style/EditTextForm"
             android:hint="@string/hint_peso"
-            android:inputType="number"
-            android:maxLength="3" />
+            />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="30dp"
-            android:hint="@string/hint_height"
-            android:inputType="number"
-            android:maxLength="3" />
+            android:id="@+id/imc_height_value"
+            style="@style/EditTextForm"
+            android:hint="@string/hint_height" />
 
         <Button
             android:id="@+id/btn_calc_imc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/black"
-            android:textColor="@color/white"
+            style="@style/ButtonForm"
             android:text="@string/btn_calc_imc" />
     </LinearLayout>
 </ScrollView>
