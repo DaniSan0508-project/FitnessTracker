@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Fitness Tracker</string>
+    <string name="label_imc">IMC</string>
+    <string name="text_imc">O IMC é uma medida calculada usando a altura e o peso de uma pessoa para ajudar a determinar a faixa de peso que ela se encontra. Ele pode ser usado como uma ferramenta para sinalizar possíveis problemas de saúde relacionados ao peso, embora não meça diretamente a gordura corporal.</string>
+    <string name="hint_peso">Peso(KG)</string>
+    <string name="hint_height">Altura(CM)</string>
+    <string name="btn_calc_imc">Calcular IMC</string>
+</resources>
