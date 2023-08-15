@@ -2,10 +2,8 @@ package co.tiagoaguiar.fitnesstracker
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Debug
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
@@ -39,6 +37,7 @@ class ImcActivity : AppCompatActivity() {
                     dialog.dismiss()
                 }
                 .show()
+            currentFocus?.hideKeyboard()
         }
 
 
