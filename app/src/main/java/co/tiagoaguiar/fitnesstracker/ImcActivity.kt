@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 
 class ImcActivity : AppCompatActivity() {
     private lateinit var weight: EditText
@@ -26,14 +28,17 @@ class ImcActivity : AppCompatActivity() {
             val weightValue = weight.text.toString().trim()
             val heightValue = height.text.toString().trim()
 
-            if(!validateInputs(weightValue, heightValue)){
+            if (!validateInputs(weightValue, heightValue)) {
                 return@setOnClickListener
             }
-
             val result = imcCal(weightValue, heightValue)
-
-            showShortToast("Seu IMC é:", result)
-
+            AlertDialog.Builder(this)
+                .setTitle(getString(R.string.title_imc_dialog))
+                .setMessage(getString(imcResponse(result)) + " : " + String.format("%.2f", result))
+                .setPositiveButton(android.R.string.ok) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
 
 
@@ -43,7 +48,8 @@ class ImcActivity : AppCompatActivity() {
         if (weightValue.isEmpty() ||
             weightValue.startsWith("0") ||
             heightValue.isEmpty() ||
-            heightValue.startsWith("0")) {
+            heightValue.startsWith("0")
+        ) {
             Toast.makeText(
                 this,
                 "Por favor, insira valores válidos para peso e altura.",
@@ -64,6 +70,7 @@ class ImcActivity : AppCompatActivity() {
         return true
 
     }
+
     private fun imcCal(weightValue: String, heightValue: String): Float {
         val weightFloat = weightValue.toFloat()
         val heightFloat = heightValue.toFloat()
@@ -71,4 +78,19 @@ class ImcActivity : AppCompatActivity() {
 
         return weightFloat / (heightInMeters * heightInMeters)
     }
+
+    @StringRes
+    private fun imcResponse(imcValue: Float): Int {
+        return when {
+            imcValue <= 15 -> R.string.imc_severely_low_weight
+            imcValue <= 16 -> R.string.imc_very_low_weight
+            imcValue <= 18.5 -> R.string.imc_low_weight
+            imcValue <= 24.9 -> R.string.normal
+            imcValue <= 29.9 -> R.string.imc_high_weight
+            imcValue <= 34.9 -> R.string.imc_so_high_weight
+            imcValue <= 39.9 -> R.string.imc_severely_high_weight
+            else -> R.string.imc_extreme_weight
+        }
+    }
+
 }

@@ -20,7 +20,4 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    public fun showShortToast(message: String){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
 }
