@@ -8,24 +8,10 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/btn_imc"
-        android:background="@color/light_grey"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="vertical">
-
-    <ImageView
-        android:src="@drawable/ic_baseline_wb_sunny_24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_imc"
-        />
-    </LinearLayout>
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_main"
+        android:layout_width="match_parent"
+        tools:listitem="@layout/main_item"
+        tools:itemCount="10"
+        android:layout_height="match_parent"/>
 </LinearLayout>
