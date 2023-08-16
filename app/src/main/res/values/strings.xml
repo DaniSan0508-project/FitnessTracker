@@ -15,4 +15,5 @@
     <string name="imc_severely_high_weight">Severamente obeso</string>
     <string name="imc_extreme_weight">Extremamente obeso</string>
     <string name="title_imc_dialog">Resultado do Cálculo de IMC</string>
+    <string name="save">Salvar</string>
 </resources>

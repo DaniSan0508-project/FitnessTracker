@@ -1,5 +1,6 @@
 package co.tiagoaguiar.fitnesstracker
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -7,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
+import co.tiagoaguiar.fitnesstracker.model.Calc
 
 class ImcActivity : AppCompatActivity() {
     private lateinit var weight: EditText
@@ -33,6 +35,19 @@ class ImcActivity : AppCompatActivity() {
             AlertDialog.Builder(this)
                 .setTitle(getString(R.string.title_imc_dialog))
                 .setMessage(getString(imcResponse(result)) + " : " + String.format("%.2f", result))
+                .setNegativeButton(R.string.save) {dialog, _ ->
+                    Thread{
+                        val app = application as App
+                        val dao = app.db.calcDao()
+                        dao.insert(Calc(type = "imc", res = result))
+                        runOnUiThread {
+                            val intent = Intent(this,ListCalcActivity::class.java)
+                            intent.putExtra("type","imc")
+                            startActivity(intent)
+                        }
+
+                    }.start()
+                }
                 .setPositiveButton(android.R.string.ok) { dialog, _ ->
                     dialog.dismiss()
                 }
@@ -70,16 +85,16 @@ class ImcActivity : AppCompatActivity() {
 
     }
 
-    private fun imcCal(weightValue: String, heightValue: String): Float {
-        val weightFloat = weightValue.toFloat()
-        val heightFloat = heightValue.toFloat()
+    private fun imcCal(weightValue: String, heightValue: String): Double {
+        val weightFloat = weightValue.toDouble()
+        val heightFloat = heightValue.toDouble()
         val heightInMeters = heightFloat / 100
 
         return weightFloat / (heightInMeters * heightInMeters)
     }
 
     @StringRes
-    private fun imcResponse(imcValue: Float): Int {
+    private fun imcResponse(imcValue: Double): Int {
         return when {
             imcValue <= 15 -> R.string.imc_severely_low_weight
             imcValue <= 16 -> R.string.imc_very_low_weight
