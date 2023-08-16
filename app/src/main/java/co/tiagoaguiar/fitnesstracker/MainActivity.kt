@@ -1,6 +1,7 @@
 package co.tiagoaguiar.fitnesstracker
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,21 +25,28 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         setContentView(R.layout.activity_main)
 
         val mainItems = mutableListOf<MainItem>()
-        mainItems.addAll(listOf(
-            MainItem(1, R.drawable.ic_baseline_wb_sunny_24, R.string.app_name, Color.BLUE),
-            MainItem(2, R.drawable.ic_baseline_wb_sunny_24, R.string.result_imc, Color.GREEN),
-            MainItem(3, R.drawable.ic_baseline_wb_sunny_24, R.string.app_name, Color.GRAY),
-            MainItem(4, R.drawable.ic_baseline_wb_sunny_24, R.string.result_imc, Color.CYAN)
-        ))
-
+        mainItems.addAll(
+            listOf(
+                MainItem(1, R.drawable.ic_baseline_wb_sunny_24, R.string.app_name, Color.BLUE),
+                MainItem(2, R.drawable.ic_baseline_wb_sunny_24, R.string.result_imc, Color.GREEN),
+                MainItem(3, R.drawable.ic_baseline_wb_sunny_24, R.string.app_name, Color.GRAY),
+                MainItem(4, R.drawable.ic_baseline_wb_sunny_24, R.string.result_imc, Color.CYAN)
+            )
+        )
 
         rvMain = findViewById(R.id.rv_main)
         rvMain.adapter = MainAdapter(mainItems, this)
-        rvMain.layoutManager = GridLayoutManager(this,2)
+        rvMain.layoutManager = GridLayoutManager(this, 2)
 
     }
+
     override fun onClick(id: Int) {
-        Toast.makeText(this,id.toString(),Toast.LENGTH_SHORT).show()
+        when(id){
+            1->{
+                val intent = Intent(this,ImcActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     private inner class MainAdapter(
@@ -60,6 +68,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         override fun getItemCount(): Int {
             return mainItems.size
         }
+
         private inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             fun bind(item: MainItem) {
@@ -70,14 +79,12 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
                 img.setImageResource(item.drawableId)
                 container.setBackgroundColor(item.color)
 
-               container.setOnClickListener {
-                   onItemClickListener.onClick(item.id)
-               }
+                container.setOnClickListener {
+                    onItemClickListener.onClick(item.id)
+                }
             }
 
 
         }
     }
-
-
 }
