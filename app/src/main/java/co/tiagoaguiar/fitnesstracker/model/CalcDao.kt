@@ -9,5 +9,5 @@ interface CalcDao {
     @Insert
     fun insert(calc: Calc)
     @Query("SELECT * FROM Calc WHERE type = :type")
-    fun findByType(type: String): List<Calc>
+    fun findByType(type: String): MutableList<Calc>
 }

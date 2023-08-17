@@ -3,6 +3,8 @@ package co.tiagoaguiar.fitnesstracker
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -19,9 +21,11 @@ class ImcActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_imc)
 
+
         weight = findViewById(R.id.imc_weight_value)
         height = findViewById(R.id.imc_height_value)
         btnCalcImc = findViewById(R.id.btn_imc_calc)
+
 
 
         btnCalcImc.setOnClickListener {
@@ -35,15 +39,13 @@ class ImcActivity : AppCompatActivity() {
             AlertDialog.Builder(this)
                 .setTitle(getString(R.string.title_imc_dialog))
                 .setMessage(getString(imcResponse(result)) + " : " + String.format("%.2f", result))
-                .setNegativeButton(R.string.save) {dialog, _ ->
-                    Thread{
+                .setNegativeButton(R.string.save) { dialog, _ ->
+                    Thread {
                         val app = application as App
                         val dao = app.db.calcDao()
                         dao.insert(Calc(type = "imc", res = result))
                         runOnUiThread {
-                            val intent = Intent(this,ListCalcActivity::class.java)
-                            intent.putExtra("type","imc")
-                            startActivity(intent)
+                            startListCalcActivity("imc")
                         }
 
                     }.start()
@@ -56,6 +58,28 @@ class ImcActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_search -> {
+                finish()
+                startListCalcActivity("imc")
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun startListCalcActivity(type: String) {
+        val intent = Intent(this, ListCalcActivity::class.java)
+        intent.putExtra("type", type)
+        startActivity(intent)
     }
 
     private fun validateInputs(weightValue: String, heightValue: String): Boolean {

@@ -15,14 +15,16 @@ import java.text.SimpleDateFormat
 
 class ListCalcActivity : AppCompatActivity() {
     private lateinit var rvMain: RecyclerView
-    private var items: List<Calc> = listOf()
+    private var items: MutableList<Calc> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_calc)
 
+        val adapter =  MainAdapter(items)
         rvMain = findViewById(R.id.rv_items)
         rvMain.layoutManager = LinearLayoutManager(this)
+        rvMain.adapter = adapter
 
         val type = intent?.extras?.getString("type")
 
@@ -30,19 +32,22 @@ class ListCalcActivity : AppCompatActivity() {
             Thread {
                 val app = application as App
                 val dao = app.db.calcDao()
-                items = dao.findByType(type)
+                val newItems = dao.findByType(type)
 
                 runOnUiThread {
-                    rvMain.adapter = MainAdapter(items)
+                    items.clear()
+                    items.addAll(newItems)
+                    adapter.notifyDataSetChanged()
                 }
 
             }.start()
+
         } else {
             throw IllegalStateException("Type not found")
         }
     }
 
-    private inner class MainAdapter(private val items: List<Calc>) : RecyclerView.Adapter<MainViewHolder>() {
+    private inner class MainAdapter(private val items: MutableList<Calc>) : RecyclerView.Adapter<MainViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(android.R.layout.simple_list_item_1, parent, false)
