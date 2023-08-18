@@ -27,10 +27,8 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         val mainItems = mutableListOf<MainItem>()
         mainItems.addAll(
             listOf(
-                MainItem(1, R.drawable.ic_baseline_wb_sunny_24, R.string.app_name, Color.BLUE),
-                MainItem(2, R.drawable.ic_baseline_wb_sunny_24, R.string.result_imc, Color.GREEN),
-                MainItem(3, R.drawable.ic_baseline_wb_sunny_24, R.string.app_name, Color.GRAY),
-                MainItem(4, R.drawable.ic_baseline_wb_sunny_24, R.string.result_imc, Color.CYAN)
+                MainItem(1, R.drawable.ic_baseline_wb_sunny_24, R.string.result_imc, Color.GRAY),
+                MainItem(2, R.drawable.ic_launcher_foreground, R.string.result_tmb, Color.CYAN),
             )
         )
 
@@ -44,6 +42,10 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         when(id){
             1->{
                 val intent = Intent(this,ImcActivity::class.java)
+                startActivity(intent)
+            }
+            2->{
+                val intent = Intent(this, TmbActivity::class.java)
                 startActivity(intent)
             }
         }

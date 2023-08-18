@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        app:menu="@menu/menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        tools:context=".ImcActivity">
+
+        <TextView
+            style="@style/TextViewForm"
+            android:text="@string/text_tbm" />
+
+        <EditText
+            android:id="@+id/tmb_weight_value"
+            style="@style/EditTextForm"
+            android:hint="@string/hint_peso"
+            />
+
+        <EditText
+            android:id="@+id/tmb_height_value"
+            style="@style/EditTextForm"
+            android:hint="@string/hint_height" />
+
+        <EditText
+            android:id="@+id/tmb_age_value"
+            style="@style/EditTextForm"
+            android:hint="@string/age_hint" />
+        <RadioGroup
+            android:id="@+id/tmb_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="16dp"
+            >
+            <RadioButton
+                android:id="@+id/radio_male"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male" />
+
+            <RadioButton
+                android:id="@+id/radio_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female" />
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/AutoTextViewForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <AutoCompleteTextView
+                android:id="@+id/tmb_auto_lifestyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_tmb_calc"
+            style="@style/ButtonForm"
+            android:layout_marginBottom="40dp"
+            android:text="@string/btn_calc_tmb" />
+    </LinearLayout>
+</ScrollView>

@@ -5,7 +5,7 @@
     <string name="hint_peso">Peso (KG)</string>
     <string name="hint_height">Altura (CM)</string>
     <string name="btn_calc_imc">Calcular IMC</string>
-    <string name="result_imc">O seu IMC é:</string>
+    <string name="result_imc">Verifique seu IMC:</string>
     <string name="imc_severely_low_weight">Severamente abaixo do peso</string>
     <string name="imc_very_low_weight">Muito abaixo do peso</string>
     <string name="imc_low_weight">Abaixo do peso</string>
@@ -17,4 +17,11 @@
     <string name="title_imc_dialog">Resultado do Cálculo de IMC</string>
     <string name="save">Salvar</string>
     <string name="search_menu_text">Buscar</string>
+    <string name="text_tbm">Taxa Metabólica Basal (TMB) é a quantidade de calorias que o corpo queima para realizar suas funções essenciais em repouso. É como o \'combustível mínimo\' necessário para manter a respiração, circulação, temperatura corporal e outros processos vitais. A TMB varia de pessoa para pessoa com base em fatores como idade, gênero, peso e altura. Compreender sua TMB pode ajudar a planejar uma dieta equilibrada e alcançar metas de peso de maneira saudável, fornecendo uma base para estimar a quantidade de calorias que seu corpo precisa diariamente.</string>
+    <string name="age_hint">Idade</string>
+    <string name="btn_calc_tmb">Calcular TMB</string>
+    <string name="male">Masculino</string>
+    <string name="female">Feminino</string>
+    <string name="tmb_alert_title">Resultado</string>
+    <string name="result_tmb">Verifique sua TMB</string>
 </resources>
