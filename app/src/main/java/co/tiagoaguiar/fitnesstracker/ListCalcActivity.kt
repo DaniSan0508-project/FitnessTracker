@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +27,7 @@ class ListCalcActivity : AppCompatActivity() {
         rvMain = findViewById(R.id.rv_items)
         rvMain.layoutManager = LinearLayoutManager(this)
         rvMain.adapter = adapter
+
 
         val type = intent?.extras?.getString("type")
 
@@ -65,6 +68,14 @@ class ListCalcActivity : AppCompatActivity() {
     private inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textView: TextView = itemView.findViewById(android.R.id.text1)
 
+
+        init {
+            itemView.setOnLongClickListener {
+                showDialogToDeleteItem(adapterPosition)
+                true
+            }
+        }
+
         fun bind(item: Calc) {
             val dateFormatter = SimpleDateFormat("dd/MM/yyyy")
             val formattedDate = dateFormatter.format(item.createdDate)
@@ -72,4 +83,32 @@ class ListCalcActivity : AppCompatActivity() {
             textView.text = text
         }
     }
+    private fun showDialogToDeleteItem(position: Int) {
+        val item = items[position]
+
+        AlertDialog.Builder(this)
+            .setTitle("Confirmação")
+            .setMessage("Você deseja deletar este item?")
+            .setPositiveButton("Sim") { _, _ ->
+               deleteItem(item, position)
+            }
+            .setNegativeButton("Não", null)
+            .show()
+    }
+    private fun deleteItem(item: Calc, position: Int) {
+        Thread {
+            val app = application as App
+            val dao = app.db.calcDao()
+
+            dao.delete(item)
+
+            runOnUiThread {
+                items.removeAt(position)
+                rvMain.adapter?.notifyItemRemoved(position)
+            }
+        }.start()
+    }
+
+
+
 }
