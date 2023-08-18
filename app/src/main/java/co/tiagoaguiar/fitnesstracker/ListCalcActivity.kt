@@ -88,7 +88,7 @@ class ListCalcActivity : AppCompatActivity() {
 
         AlertDialog.Builder(this)
             .setTitle("Confirmação")
-            .setMessage("Você deseja deletar este item?")
+            .setMessage("Deseja realmente deletar este item?")
             .setPositiveButton("Sim") { _, _ ->
                deleteItem(item, position)
             }
